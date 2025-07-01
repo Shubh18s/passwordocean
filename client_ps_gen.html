@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Deterministic Password Generator</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Inter font and general layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            padding: 1rem;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid #e5e7eb; /* Light border */
+        }
+        input[type="password"],
+        input[type="text"] {
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            font-size: 1rem;
+            background-color: #f9fafb;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6366f1; /* Indigo 500 */
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); /* Focus ring */
+        }
+        button {
+            background-color: #6366f1; /* Indigo 500 */
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        button:hover {
+            background-color: #4f46e5; /* Indigo 600 */
+            transform: translateY(-1px);
+        }
+        button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        .message-box {
+            background-color: #e0f2fe; /* Light blue background */
+            color: #0c4a6e; /* Dark blue text */
+            border: 1px solid #7dd3fc; /* Blue border */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
+        }
+        .message-box.show {
+            display: block;
+        }
+        .password-display {
+            background-color: #e2e8f0; /* Gray 200 */
+            color: #334155; /* Slate 700 */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            word-break: break-all; /* Break long words */
+            font-family: 'monospace'; /* Monospace font for password */
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .copy-button {
+            background-color: #10b981; /* Emerald 500 */
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .copy-button:hover {
+            background-color: #059669; /* Emerald 600 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Secure Password Generator</h1>
+
+        <div id="messageBox" class="message-box" role="alert"></div>
+
+        <div class="mb-4">
+            <label for="masterPassphrase" class="block text-gray-700 text-sm font-medium mb-2">Master Passphrase:</label>
+            <input type="password" id="masterPassphrase" placeholder="Enter your master passphrase" class="focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <div class="mb-6">
+            <label for="serviceName" class="block text-gray-700 text-sm font-medium mb-2">Service Name:</label>
+            <input type="text" id="serviceName" placeholder="e.g., Google, Facebook, MyBank" class="focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <button id="generateButton" class="w-full mb-6">Generate Password</button>
+
+        <div id="passwordDisplayContainer" class="hidden">
+            <label class="block text-gray-700 text-sm font-medium mb-2">Generated Password:</label>
+            <div class="password-display">
+                <span id="generatedPassword" class="flex-grow mr-2"></span>
+                <button id="copyButton" class="copy-button">Copy</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        // Number of iterations for PBKDF2. Higher values increase security but also computation time.
+        // A value of 600,000 is a good starting point as of 2024.
+        const PBKDF2_ITERATIONS = 600000;
+        // Length of the derived key in bytes. This influences the final password length.
+        const DERIVED_KEY_LENGTH = 32; // 32 bytes = 256 bits
+        // Length of the final password (after Base64 encoding).
+        // Base64 encoding expands data by about 33%, so 32 bytes will result in ~43 characters.
+        const FINAL_PASSWORD_LENGTH = 24; // Aim for a minimum of 16-20 characters for strong passwords.
+
+        const masterPassphraseInput = document.getElementById('masterPassphrase');
+        const serviceNameInput = document.getElementById('serviceName');
+        const generateButton = document.getElementById('generateButton');
+        const generatedPasswordSpan = document.getElementById('generatedPassword');
+        const passwordDisplayContainer = document.getElementById('passwordDisplayContainer');
+        const copyButton = document.getElementById('copyButton');
+        const messageBox = document.getElementById('messageBox');
+
+        /**
+         * Displays a message in the message box.
+         * @param {string} message - The message to display.
+         * @param {string} type - 'success', 'error', or 'info' for styling.
+         */
+        function showMessage(message, type = 'info') {
+            messageBox.textContent = message;
+            messageBox.className = 'message-box show'; // Reset classes and show
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-800', 'border-red-400');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-800', 'border-green-400');
+            } else {
+                messageBox.classList.add('bg-blue-100', 'text-blue-800', 'border-blue-400');
+            }
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, 5000);
+        }
+
+        /**
+         * Converts a string to an ArrayBuffer.
+         * @param {string} str - The string to convert.
+         * @returns {ArrayBuffer} - The ArrayBuffer representation of the string.
+         */
+        function strToArrayBuffer(str) {
+            const encoder = new TextEncoder();
+            return encoder.encode(str).buffer;
+        }
+
+        /**
+         * Converts an ArrayBuffer to a Base64 URL-safe string.
+         * @param {ArrayBuffer} buffer - The ArrayBuffer to convert.
+         * @returns {string} - The Base64 URL-safe string.
+         */
+        function arrayBufferToBase64Url(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            const len = bytes.byteLength;
+            for (let i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            // Use btoa for Base64 encoding, then replace characters for URL safety
+            // and remove padding.
+            return btoa(binary)
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=+$/, '');
+        }
+
+        /**
+         * Generates a deterministic password using Web Cryptography API (PBKDF2).
+         * @param {string} masterPassphrase - The user's secret master passphrase.
+         * @param {string} serviceName - A unique identifier for the service.
+         * @returns {Promise<string>} - A promise that resolves with the generated password.
+         */
+        async function generateDeterministicPassword(masterPassphrase, serviceName) {
+            if (!masterPassphrase || !serviceName) {
+                showMessage("Master passphrase and service name cannot be empty.", 'error');
+                return "";
+            }
+
+            try {
+                // Convert passphrase and service name to ArrayBuffers
+                const passphraseBuffer = strToArrayBuffer(masterPassphrase);
+                const serviceNameBuffer = strToArrayBuffer(serviceName); // Service name acts as salt
+
+                // Import the master passphrase as a CryptoKey
+                const key = await crypto.subtle.importKey(
+                    'raw',
+                    passphraseBuffer,
+                    { name: 'PBKDF2' },
+                    false, // Not extractable
+                    ['deriveBits']
+                );
+
+                // Define the PBKDF2 parameters
+                const pbkdf2Params = {
+                    name: 'PBKDF2',
+                    salt: serviceNameBuffer,
+                    iterations: PBKDF2_ITERATIONS,
+                    hash: 'SHA-256'
+                };
+
+                // Derive the key bits
+                const derivedBits = await crypto.subtle.deriveBits(
+                    pbkdf2Params,
+                    key,
+                    DERIVED_KEY_LENGTH * 8 // Length in bits
+                );
+
+                // Convert derived bits to Base64 URL-safe string
+                const passwordRaw = arrayBufferToBase64Url(derivedBits);
+
+                // Truncate to desired final length
+                const finalPassword = passwordRaw.substring(0, FINAL_PASSWORD_LENGTH);
+
+                return finalPassword;
+
+            } catch (error) {
+                console.error("Error generating password:", error);
+                showMessage("An error occurred during password generation. Check console for details.", 'error');
+                return "";
+            }
+        }
+
+        // Event Listener for Generate Button
+        generateButton.addEventListener('click', async () => {
+            generateButton.disabled = true; // Disable button during generation
+            generateButton.textContent = 'Generating...';
+            generatedPasswordSpan.textContent = ''; // Clear previous password
+            passwordDisplayContainer.classList.add('hidden'); // Hide display
+
+            const masterPassphrase = masterPassphraseInput.value;
+            const serviceName = serviceNameInput.value.trim();
+
+            const generatedPassword = await generateDeterministicPassword(masterPassphrase, serviceName);
+
+            if (generatedPassword) {
+                generatedPasswordSpan.textContent = generatedPassword;
+                passwordDisplayContainer.classList.remove('hidden');
+                showMessage("Password generated successfully!", 'success');
+            }
+
+            generateButton.disabled = false; // Re-enable button
+            generateButton.textContent = 'Generate Password';
+        });
+
+        // Event Listener for Copy Button
+        copyButton.addEventListener('click', () => {
+            const passwordToCopy = generatedPasswordSpan.textContent;
+            if (passwordToCopy) {
+                // Using document.execCommand('copy') as navigator.clipboard.writeText()
+                // might have restrictions in some iframe environments or older browsers.
+                const tempInput = document.createElement('textarea');
+                tempInput.value = passwordToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand('copy');
+                    showMessage("Password copied to clipboard!", 'success');
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                    showMessage("Failed to copy password. Please copy manually.", 'error');
+                }
+                document.body.removeChild(tempInput);
+            }
+        });
+
+        // Optional: Add a listener to clear message box and password display on input change
+        masterPassphraseInput.addEventListener('input', () => {
+            messageBox.classList.remove('show');
+            passwordDisplayContainer.classList.add('hidden');
+        });
+        serviceNameInput.addEventListener('input', () => {
+            messageBox.classList.remove('show');
+            passwordDisplayContainer.classList.add('hidden');
+        });
+
+    </script>
+</body>
+</html>
