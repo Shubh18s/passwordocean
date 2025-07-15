@@ -34,7 +34,7 @@
 
 ##### To Get Your Password Again:
 
-1. Open the [link](https://shubh18s.github.io/zenpass/ZenPass.html) in a browser.
+1. Open the [link](https://shubh18s.github.io/zenpass/zenpass.html) in a browser.
     
 2. Enter your unique and secret master passphrase (the one only you know!) and the exact unique service name you used before (e.g., Google, or MyBank2025 if you plan on rotating it).
     
