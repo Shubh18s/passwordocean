@@ -47,11 +47,11 @@
 
 **_ZenPass_** is built with your security and privacy as the top priority. Here's why you can feel completely confident:
 
-- Client-Side Only: The crucial distinction here is that ps_gen is designed to be client-side only. This means all the password generation magic happens right there in your own web browser. Your master passphrase is never sent over the internet, never stored on any server, and never saved anywhere after you close your browser.
+- **Client-Side Only**: The crucial distinction here is that `ZenPass` is designed to be client-side only. This means all the password generation magic happens right there in your own web browser. Your master passphrase is never sent over the internet, never stored on any server, and never saved anywhere after you close your browser.
     
-- No Data Saved: As soon as you close the browser tab or window, any trace of your master passphrase or the generated password vanishes from your device's memory.
+- **No Data Saved:** As soon as you close the browser tab or window, any trace of your master passphrase or the generated password vanishes from your device's memory.
     
-- Transparent Code: The code that powers ps_gen is open and visible (if hosted on a public platform like GitHub Pages). This transparency allows anyone to inspect how it works, building trust and ensuring there are no hidden tricks.
+- **Transparent Code:** The code that powers `ZenPass` is open and visible (if hosted on a public platform like GitHub Pages). This transparency allows anyone to inspect how it works, building trust and ensuring there are no hidden tricks.
     
 
-You're in complete control. Enjoy the freedom of strong, unique passwords without the worry!
+You're in complete control. Enjoy the freedom of strong, unique passwords without the worry of remembering 8+ characters including a capital letter and a number and a special character AND a strand of unicorn hair! No more trying to brew the perfect password potion in your head – **_ZenPass_** does it for you!
