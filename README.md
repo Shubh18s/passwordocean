@@ -22,7 +22,7 @@ ps_gen is here to revolutionize your password generation and remembering needs. 
 2. Enter and remember a unique master passphrase that only you know, along with a distinct service name (e.g., Google, Facebook, Instagram).
     
 
-- Important Note: Remember to spell your passphrase and service name exactly the same way every time, including capitalization and spacing!
+    - **Important Note:** Remember to spell your passphrase and service name exactly the same way every time, including     capitalization and spacing!
     
 
 3. Hit Generate Password.
