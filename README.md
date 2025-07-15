@@ -9,7 +9,7 @@
 
 #### Well, ZenPass is here to solve all your password problems!
 
-Get ready to experience the freedom of infinite, unique passwords from just **one Master Passphrase!** No more headaches, no more fees, just pure password zen. And the best part? It's all done securely right in your browser, no **strand of unicorn hair** required!
+Get ready to experience the freedom of infinite, unique passwords from just **one Master Passphrase!** No more headaches, no more fees, just pure password zen. And the best part? It's all done securely right in your browser!
 
 ### How ZenPass Works: Simply Brilliant!
 
