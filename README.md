@@ -15,7 +15,7 @@ ps_gen is here to revolutionize your password generation and remembering needs. 
 
 ### How ps_gen Works: It's That Simple!
 
-To Generate a New Password:
+##### To Generate a New Password:
 
 1. Open the link in any web browser on any device.
     
@@ -32,7 +32,7 @@ To Generate a New Password:
 5. Close the browser. It's that simple!
     
 
-To Get Your Password Again:
+##### To Get Your Password Again:
 
 1. Open the link in a browser.
     
