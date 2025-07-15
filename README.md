@@ -1,4 +1,4 @@
-# 👋 Say Goodbye to Password Headaches with `psgen`!
+# 👋 Say Goodbye to Password Headaches with `ZenPass`!
 
 ### Are you also...
 
@@ -11,13 +11,13 @@
 
 #### Well, fret not!
 
-**_psgen_** is here to revolutionize your password generation and remembering needs. Get ready to experience true peace of mind, all without spending a penny or downloading a single piece of software!
+**_ZenPass_** is here to revolutionize your password generation and remembering needs. Get ready to experience true peace of mind, all without spending a penny or downloading a single piece of software!
 
-### How `psgen` Works:
+### How `ZenPass` Works:
 
 ##### To Generate a New Password:
 
-1. Open the [link](https://shubh18s.github.io/psgen/client_ps_gen.html) in any web browser on any device.
+1. Open the [link](https://shubh18s.github.io/psgen/zenpass.html) in any web browser on any device.
     
 2. Enter and remember a unique master passphrase that only you know, along with a distinct service name (e.g., Google, Facebook, Instagram).
     
@@ -34,7 +34,7 @@
 
 ##### To Get Your Password Again:
 
-1. Open the [link](https://shubh18s.github.io/psgen/client_ps_gen.html) in a browser.
+1. Open the [link](https://shubh18s.github.io/psgen/ZenPass.html) in a browser.
     
 2. Enter your unique and secret master passphrase (the one only you know!) and the exact unique service name you used before (e.g., Google, or MyBank2025 if you rotated it).
     
@@ -45,7 +45,7 @@
 
 ### Is This Safe, Though? Absolutely!
 
-**_psgen_** is built with your security and privacy as the top priority. Here's why you can feel completely confident:
+**_ZenPass_** is built with your security and privacy as the top priority. Here's why you can feel completely confident:
 
 - Client-Side Only: The crucial distinction here is that ps_gen is designed to be client-side only. This means all the password generation magic happens right there in your own web browser. Your master passphrase is never sent over the internet, never stored on any server, and never saved anywhere after you close your browser.
     
