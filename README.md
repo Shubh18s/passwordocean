@@ -13,7 +13,7 @@
 
 ps_gen is here to revolutionize your password generation and remembering needs. Get ready to experience true peace of mind, all without spending a penny or downloading a single piece of software!
 
-### How `psgen` Works: It's That Simple!
+### How `psgen` Works:
 
 ##### To Generate a New Password:
 
