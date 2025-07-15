@@ -11,7 +11,7 @@
 
 #### Well, fret not!
 
-ps_gen is here to revolutionize your password generation and remembering needs. Get ready to experience true peace of mind, all without spending a penny or downloading a single piece of software!
+**_psgen_** is here to revolutionize your password generation and remembering needs. Get ready to experience true peace of mind, all without spending a penny or downloading a single piece of software!
 
 ### How `psgen` Works:
 
