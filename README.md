@@ -17,7 +17,7 @@
 
 ##### To Generate a New Password:
 
-1. Open the [link](https://shubh18s.github.io/psgen/zenpass.html) in any web browser on any device.
+1. Open the [link](https://shubh18s.github.io/zenpass/zenpass.html) in any web browser on any device.
     
 2. Enter and remember a unique master passphrase that only you know, along with a distinct service name (e.g., Google, Facebook, Instagram).
     
@@ -34,7 +34,7 @@
 
 ##### To Get Your Password Again:
 
-1. Open the [link](https://shubh18s.github.io/psgen/ZenPass.html) in a browser.
+1. Open the [link](https://shubh18s.github.io/zenpass/ZenPass.html) in a browser.
     
 2. Enter your unique and secret master passphrase (the one only you know!) and the exact unique service name you used before (e.g., Google, or MyBank2025 if you rotated it).
     
