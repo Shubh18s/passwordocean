@@ -55,5 +55,3 @@ ps_gen is built with your security and privacy as the top priority. Here's why y
     
 
 You're in complete control. Enjoy the freedom of strong, unique passwords without the worry!
-
-**
