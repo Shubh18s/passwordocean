@@ -1,4 +1,4 @@
-# 👋 Say Goodbye to Password Headaches with ps_gen!
+# 👋 Say Goodbye to Password Headaches with `psgen`!
 
 ### Are you also...
 
