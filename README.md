@@ -45,7 +45,7 @@ ps_gen is here to revolutionize your password generation and remembering needs. 
 
 ### Is This Safe, Though? Absolutely!
 
-ps_gen is built with your security and privacy as the top priority. Here's why you can feel completely confident:
+**_psgen_** is built with your security and privacy as the top priority. Here's why you can feel completely confident:
 
 - Client-Side Only: The crucial distinction here is that ps_gen is designed to be client-side only. This means all the password generation magic happens right there in your own web browser. Your master passphrase is never sent over the internet, never stored on any server, and never saved anywhere after you close your browser.
     
