@@ -218,11 +218,27 @@
         .footer-link a:hover {
             text-decoration: underline;
         }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem; /* Space between icon and text */
+            margin-bottom: 0.5rem; /* Adjust margin as needed */
+        }
+        .header-icon {
+            width: 2.5rem; /* Size of the icon */
+            height: 2.5rem; /* Size of the icon */
+            /* You might want to adjust vertical alignment if needed */
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-3xl font-extrabold text-center text-gray-900 mb-2">ZenPass: Your Master Key to Infinite Passwords</h1>
+        <div class="header-container">
+            <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧘</text></svg>" alt="ZenPass Icon" class="header-icon">
+            <h1 class="text-3xl font-extrabold text-center text-gray-900">ZenPass: Your Master Key to Infinite Passwords</h1>
+        </div>
         <p class="subtitle">Generate unique, strong passwords from one <b>Master Passphrase</b> for all your accounts. No storage, no fees, ultimate privacy!</p>
 
         <!-- Button to explain how it works - Now an icon with text -->
@@ -276,7 +292,7 @@
 
         <!-- Email Link in Footer -->
         <div class="footer-link">
-            <p>Questions, feedback, or just want to say hi? Reach out to us at <a href="mailto:your.email@example.com">singh18shubhdeep@gmail.com</a></p>
+            <p>Questions, feedback, or just want to say hi? Reach out to us at <a href="mailto:singh18shubhdeep@gmail.com">singh18shubhdeep@gmail.com</a></p>
         </div>
     </div>
 
