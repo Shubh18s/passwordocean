@@ -256,17 +256,17 @@
 
         <button id="generateButton" class="w-full mb-6 main-button">Generate Password</button>
 
-        <!-- Important Note for the user -->
-        <div class="button-note mb-6">
-            <p><strong>Important Note:</strong> ZenPass does not store any passwords. Your passwords are regenerated each time you provide your Master Passphrase and the exact Service Name. Therefore, we highly recommend using a different, easily recoverable password for your recovery email account, in case you ever forget your Master Passphrase or a specific Service Name.</p>
-        </div>
-
         <div id="passwordDisplayContainer" class="hidden">
             <label class="block text-gray-800 text-base font-semibold mb-2">Generated Password:</label>
             <div class="password-display">
                 <span id="generatedPassword" class="flex-grow mr-3"></span>
                 <button id="copyButton" class="copy-button">Copy</button>
             </div>
+        </div>
+
+        <!-- Important Note for the user - Moved after password display -->
+        <div class="button-note mt-6"> <!-- Adjusted margin-top for spacing -->
+            <p><strong>Important Note:</strong> ZenPass does not store any passwords. Your passwords are regenerated each time you provide your Master Passphrase and the exact Service Name. Therefore, we highly recommend using a different, easily recoverable password for your recovery email account, in case you ever forget your Master Passphrase or a specific Service Name.</p>
         </div>
     </div>
 
