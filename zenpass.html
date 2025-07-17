@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Deterministic Password Generator</title>
+    <!-- Favicon: Zen Emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧘</text></svg>" />
     <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -135,9 +137,6 @@
             color: #b45309; /* Darker orange for emphasis */
         }
 
-        /* Removed How it Works Banner styles */
-        /* .how-it-works-banner { ... } */
-
         /* Styles for the expandable info sections */
         .expandable-info {
             background-color: #f8fafc;
@@ -167,26 +166,26 @@
         .toggle-icon-button {
             background-color: transparent; /* No background */
             border: none; /* No border */
-            color: #64748b; /* Icon color */
-            padding: 0.5rem; /* Padding around the icon */
-            border-radius: 0.5rem; /* Slightly rounded corners for a button-like feel */
+            color: #94a3b8; /* Slate 400 - lighter default color */
+            padding: 0.25rem 0.5rem; /* Made button smaller */
+            border-radius: 0.25rem; /* Less rounded */
+            font-size: 0.75rem; /* Smaller font size */
+            font-weight: 500; /* Slightly less bold */
             cursor: pointer;
             transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.25rem; /* Space between icon and text */
-            font-size: 0.85rem; /* Font size for the text */
-            font-weight: 600;
+            gap: 0.2rem; /* Reduced space between icon and text */
             margin-bottom: 1rem; /* Space below the icon */
         }
         .toggle-icon-button:hover {
-            color: #1e293b; /* Darker on hover */
+            color: #64748b; /* Slate 500 on hover */
             background-color: #e2e8f0; /* Light background on hover */
         }
         .toggle-icon-button svg {
-            width: 1.2rem; /* Icon size */
-            height: 1.2rem; /* Icon size */
+            width: 1rem; /* Smaller icon */
+            height: 1rem; /* Smaller icon */
             transition: transform 0.2s ease-in-out;
         }
         .toggle-icon-button.expanded svg {
