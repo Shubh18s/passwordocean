@@ -231,6 +231,32 @@
             /* You might want to adjust vertical alignment if needed */
             vertical-align: middle;
         }
+        .input-group {
+            position: relative;
+            display: flex; /* Use flexbox to align input and button */
+            align-items: center;
+        }
+        .input-group input {
+            flex-grow: 1; /* Allow input to take available space */
+            padding-right: 3rem; /* Make space for the eye button */
+        }
+        .toggle-password-visibility {
+            position: absolute;
+            right: 0.75rem; /* Position from the right edge of the input */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: #64748b;
+            transition: color 0.2s ease-in-out;
+        }
+        .toggle-password-visibility:hover {
+            color: #1e293b;
+        }
+        .toggle-password-visibility svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
     </style>
 </head>
 <body>
@@ -267,7 +293,14 @@
 
         <div class="mb-5">
             <label for="masterPassphrase" class="block text-gray-800 text-base font-semibold mb-2">Master Passphrase:</label>
-            <input type="password" id="masterPassphrase" placeholder="Enter your master passphrase" class="focus:ring-indigo-600 focus:border-indigo-600">
+            <div class="input-group">
+                <input type="password" id="masterPassphrase" placeholder="Enter your master passphrase" class="focus:ring-indigo-600 focus:border-indigo-600">
+                <button type="button" id="togglePasswordVisibility" class="toggle-password-visibility">
+                    <!-- Eye icon for visibility toggle -->
+                    <svg id="eyeOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    <svg id="eyeClosed" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274-4.057 5.064-7 9.542-7 1.274 0 2.483.238 3.625.675M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0c-.815 2.87-2.347 5.337-4.375 7.175M3 12c.815-2.87 2.347-5.337 4.375-7.175M1 1l22 22"></path></svg>
+                </button>
+            </div>
         </div>
 
         <div class="mb-7">
@@ -314,6 +347,12 @@
         const toggleDetailedHowItWorksButton = document.getElementById('toggleDetailedHowItWorks');
         const detailedHowItWorksContent = document.getElementById('detailedHowItWorksContent');
 
+        // Password visibility toggle elements
+        const togglePasswordVisibilityButton = document.getElementById('togglePasswordVisibility');
+        const eyeOpenIcon = document.getElementById('eyeOpen');
+        const eyeClosedIcon = document.getElementById('eyeClosed');
+
+
         /**
          * Toggles the visibility of an element and rotates the SVG icon.
          * @param {HTMLElement} contentElement - The element whose visibility to toggle.
@@ -331,6 +370,14 @@
 
         // Event listener for the "How It Works" toggle button
         toggleDetailedHowItWorksButton.addEventListener('click', () => toggleVisibility(detailedHowItWorksContent, toggleDetailedHowItWorksButton));
+
+        // Event listener for password visibility toggle
+        togglePasswordVisibilityButton.addEventListener('click', () => {
+            const isPassword = masterPassphraseInput.type === 'password';
+            masterPassphraseInput.type = isPassword ? 'text' : 'password';
+            eyeOpenIcon.classList.toggle('hidden', !isPassword);
+            eyeClosedIcon.classList.toggle('hidden', isPassword);
+        });
 
 
         function showMessage(message, type = 'info') {
