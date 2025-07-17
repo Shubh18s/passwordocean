@@ -7,6 +7,11 @@
     <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Ensure hidden class works */
+        .hidden {
+            display: none !important; /* Added !important to ensure override */
+        }
+
         /* Custom styles for Inter font and general layout */
         body {
             font-family: 'Inter', sans-serif;
@@ -16,6 +21,7 @@
             align-items: center;
             min-height: 100vh; /* Full viewport height */
             padding: 1.5rem; /* Increased padding */
+            position: relative; /* Needed for absolute positioning of info button */
         }
         .container {
             background-color: #ffffff;
@@ -42,10 +48,10 @@
             border-color: #4f46e5; /* Indigo 600 on focus */
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.3); /* More prominent focus ring */
         }
-        button {
+        .main-button { /* Specific class for the generate button */
             background-color: #007bff !important; /* Vibrant Blue for main button, added !important */
             color: #ffffff;
-            padding: 1.75rem 2rem; /* Significantly increased vertical padding to make button much taller */
+            padding: 2rem 2rem; /* Significantly increased vertical padding to make button much taller */
             border-radius: 0.625rem; /* More rounded */
             font-weight: 700; /* Bolder text */
             font-size: 1.25rem; /* Larger font for button text */
@@ -54,12 +60,12 @@
             box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
             border: none; /* Ensure no default border */
         }
-        button:hover {
+        .main-button:hover {
             background-color: #0056b3 !important; /* Darker blue on hover */
             transform: translateY(-2px); /* More noticeable lift */
             box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.2);
         }
-        button:active {
+        .main-button:active {
             transform: translateY(0);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Reset shadow on click */
         }
@@ -98,7 +104,7 @@
         .copy-button {
             background-color: #28a745 !important; /* Vibrant Green for copy button, added !important */
             color: white;
-            padding: 1rem 1.25rem; /* Adjusted padding to be proportional to main button */
+            padding: 1.125rem 1.25rem; /* Adjusted padding to be proportional to main button */
             border-radius: 0.5rem;
             font-size: 1rem; /* Slightly larger font for copy button */
             font-weight: 600;
@@ -114,50 +120,126 @@
             transform: translateY(0);
             box-shadow: none;
         }
-        /* New styles for info sections */
-        .info-section {
-            background-color: #f0f9ff; /* Light blue background */
-            border: 1px solid #bfdbfe; /* Light blue border */
+        /* Styling for the note after the button */
+        .button-note {
+            background-color: #fffbeb; /* Light yellow background */
+            border: 1px solid #fcd34d; /* Yellow border */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1.25rem; /* Space from the button */
+            font-size: 0.875rem;
+            color: #78350f; /* Dark brown text */
+            line-height: 1.4;
+        }
+        .button-note strong {
+            color: #b45309; /* Darker orange for emphasis */
+        }
+
+        /* How it Works Banner */
+        .how-it-works-banner {
+            background-color: #dbeafe; /* Light blue */
+            border: 1px solid #93c5fd; /* Blue border */
             border-radius: 0.75rem;
-            padding: 1.25rem;
+            padding: 1rem;
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
-            color: #334155;
-            line-height: 1.5;
+            color: #1e3a8a; /* Dark blue text */
+            text-align: center;
+            line-height: 1.4;
         }
-        .info-section h2 {
-            font-size: 1.15rem;
-            font-weight: 700;
+        .how-it-works-banner strong {
+            color: #1e40af; /* Even darker blue for emphasis */
+        }
+
+        /* Styles for the expandable info sections */
+        .expandable-info {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #475569; /* Slate 600 */
+        }
+        .expandable-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
             color: #1e293b;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
-        .info-section ul {
+        .expandable-info ul {
             list-style: disc;
             margin-left: 1.25rem;
             padding-left: 0;
+            margin-top: 0.5rem;
         }
-        .info-section li {
-            margin-bottom: 0.5rem;
+        .expandable-info li {
+            margin-bottom: 0.25rem;
         }
-        .info-section strong {
-            color: #1e293b;
+        /* Styling for the icon toggle button */
+        .toggle-icon-button {
+            background-color: transparent; /* No background */
+            border: none; /* No border */
+            color: #64748b; /* Icon color */
+            padding: 0.5rem; /* Padding around the icon */
+            border-radius: 0.5rem; /* Slightly rounded corners for a button-like feel */
+            cursor: pointer;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem; /* Space between icon and text */
+            font-size: 0.85rem; /* Font size for the text */
+            font-weight: 600;
+            margin-bottom: 1rem; /* Space below the icon */
+        }
+        .toggle-icon-button:hover {
+            color: #1e293b; /* Darker on hover */
+            background-color: #e2e8f0; /* Light background on hover */
+        }
+        .toggle-icon-button svg {
+            width: 1.2rem; /* Icon size */
+            height: 1.2rem; /* Icon size */
+            transition: transform 0.2s ease-in-out;
+        }
+        .toggle-icon-button.expanded svg {
+            transform: rotate(180deg);
+        }
+        .how-it-works-button-container {
+            text-align: left; /* Aligns content to the left */
+            margin-top: 0.5rem; /* Adjust margin as needed */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-3xl font-extrabold text-center text-gray-900 mb-8">Secure Password Generator</h1>
+        <h1 class="text-3xl font-extrabold text-center text-gray-900 mb-8">ZenPass: Your Master Key to Infinite Passwords</h1>
 
-        <!-- How it Works Section -->
-        <div class="info-section">
-            <h2>How It Works:</h2>
-            <ul class="list-disc ml-5 text-gray-700">
-                <li>Enter a **Master Passphrase** (your secret key, only you know it!).</li>
-                <li>Enter a **Service Name** (e.g., `Google`, `Netflix`). Remember to spell it *exactly* the same way each time.</li>
-                <li>Click **"Generate Password"** to get your unique, strong password.</li>
-                <li>**Copy** and use it. When you close the browser, it vanishes!</li>
-                <li>To get it again, just re-enter your **Master Passphrase** and the **Service Name**.</li>
+        <!-- How it Works Info Banner -->
+        <div class="how-it-works-banner">
+            <p>Generate unique, strong passwords from one <b>Master Passphrase</b> for all your accounts. No storage, no fees, ultimate privacy!</p>
+        </div>
+
+        <!-- Button to explain how it works - Now an icon with text -->
+        <div class="how-it-works-button-container">
+            <button id="toggleDetailedHowItWorks" class="toggle-icon-button">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                How It Works
+            </button>
+        </div>
+
+        <!-- Expandable Detailed How It Works Section -->
+        <div id="detailedHowItWorksContent" class="expandable-info hidden">
+            <h3>Step-by-Step Usage:</h3>
+            <ul class="list-decimal ml-5 text-gray-700">
+                <li>**Enter Master Passphrase:** Your secret key, known only to you.</li>
+                <li>**Enter Service Name:** A unique identifier for the service (e.g., `Google`, `Netflix`). Remember to spell it *exactly* the same way each time, including capitalization and spacing!</li>
+                <li>**Click "Generate Password":** Get your unique, strong password instantly.</li>
+                <li>**Copy & Use:** Copy the generated password and use it with your service.</li>
+                <li>**Close Browser:** When you close the browser, all sensitive data vanishes from memory.</li>
+                <li>**Retrieve Anytime:** To get the password again, just re-enter your Master Passphrase and the exact Service Name.</li>
             </ul>
+            <p class="mt-3 text-gray-700">ZenPass is a generator, not a storage solution. You can either remember one Master Passphrase to generate them all, or save these unique passwords in your favorite password manager.</p>
         </div>
 
         <div id="messageBox" class="message-box" role="alert"></div>
@@ -172,7 +254,12 @@
             <input type="text" id="serviceName" placeholder="e.g., Google, Facebook, MyBank" class="focus:ring-indigo-600 focus:border-indigo-600">
         </div>
 
-        <button id="generateButton" class="w-full mb-6">Generate Password</button>
+        <button id="generateButton" class="w-full mb-6 main-button">Generate Password</button>
+
+        <!-- Important Note for the user -->
+        <div class="button-note mb-6">
+            <p><strong>Important Note:</strong> ZenPass does not store any passwords. Your passwords are regenerated each time you provide your Master Passphrase and the exact Service Name. Therefore, we highly recommend using a different, easily recoverable password for your recovery email account, in case you ever forget your Master Passphrase or a specific Service Name.</p>
+        </div>
 
         <div id="passwordDisplayContainer" class="hidden">
             <label class="block text-gray-800 text-base font-semibold mb-2">Generated Password:</label>
@@ -181,24 +268,13 @@
                 <button id="copyButton" class="copy-button">Copy</button>
             </div>
         </div>
-
-        <!-- Security Reassurance Section -->
-        <div class="info-section mt-6">
-            <h2>Is This Safe? Absolutely!</h2>
-            <p class="text-gray-700">All password generation happens **client-side** in your browser. Your Master Passphrase is **never** sent over the internet or stored anywhere. As soon as you close the page, all sensitive data vanishes from memory.</p>
-        </div>
     </div>
 
     <script>
         // --- Configuration ---
-        // Number of iterations for PBKDF2. Higher values increase security but also computation time.
-        // A value of 600,000 is a good starting point as of 2024.
         const PBKDF2_ITERATIONS = 600000;
-        // Length of the derived key in bytes. This influences the final password length.
-        const DERIVED_KEY_LENGTH = 32; // 32 bytes = 256 bits
-        // Length of the final password (after Base64 encoding).
-        // Base64 encoding expands data by about 33%, so 32 bytes will result in ~43 characters.
-        const FINAL_PASSWORD_LENGTH = 24; // Aim for a minimum of 16-20 characters for strong passwords.
+        const DERIVED_KEY_LENGTH = 32;
+        const FINAL_PASSWORD_LENGTH = 24;
 
         const masterPassphraseInput = document.getElementById('masterPassphrase');
         const serviceNameInput = document.getElementById('serviceName');
@@ -208,18 +284,35 @@
         const copyButton = document.getElementById('copyButton');
         const messageBox = document.getElementById('messageBox');
 
+        // Toggle buttons and content divs
+        const toggleDetailedHowItWorksButton = document.getElementById('toggleDetailedHowItWorks');
+        const detailedHowItWorksContent = document.getElementById('detailedHowItWorksContent');
+
         /**
-         * Displays a message in the message box.
-         * @param {string} message - The message to display.
-         * @param {string} type - 'success', 'error', or 'info' for styling.
+         * Toggles the visibility of an element and rotates the SVG icon.
+         * @param {HTMLElement} contentElement - The element whose visibility to toggle.
+         * @param {HTMLElement} buttonElement - The button element containing the SVG icon.
          */
+        function toggleVisibility(contentElement, buttonElement) {
+            contentElement.classList.toggle('hidden');
+            // Remove the expanded class if content is hidden, add if shown
+            if (contentElement.classList.contains('hidden')) {
+                buttonElement.classList.remove('expanded');
+            } else {
+                buttonElement.classList.add('expanded');
+            }
+        }
+
+        // Event listener for the "How It Works" toggle button
+        toggleDetailedHowItWorksButton.addEventListener('click', () => toggleVisibility(detailedHowItWorksContent, toggleDetailedHowItWorksButton));
+
+
         function showMessage(message, type = 'info') {
             messageBox.textContent = message;
-            // Remove all type-specific classes first to ensure correct styling
             messageBox.classList.remove('bg-red-100', 'text-red-800', 'border-red-400',
                                        'bg-green-100', 'text-green-800', 'border-green-400',
                                        'bg-blue-100', 'text-blue-800', 'border-blue-400');
-            messageBox.className = 'message-box show'; // Reset classes and show
+            messageBox.className = 'message-box show';
 
             if (type === 'error') {
                 messageBox.classList.add('bg-red-100', 'text-red-800', 'border-red-400');
@@ -228,27 +321,16 @@
             } else {
                 messageBox.classList.add('bg-blue-100', 'text-blue-800', 'border-blue-400');
             }
-            // Hide message after 5 seconds
             setTimeout(() => {
                 messageBox.classList.remove('show');
             }, 5000);
         }
 
-        /**
-         * Converts a string to an ArrayBuffer.
-         * @param {string} str - The string to convert.
-         * @returns {ArrayBuffer} - The ArrayBuffer representation of the string.
-         */
         function strToArrayBuffer(str) {
             const encoder = new TextEncoder();
             return encoder.encode(str).buffer;
         }
 
-        /**
-         * Converts an ArrayBuffer to a Base64 URL-safe string.
-         * @param {ArrayBuffer} buffer - The ArrayBuffer to convert.
-         * @returns {string} - The Base64 URL-safe string.
-         */
         function arrayBufferToBase64Url(buffer) {
             let binary = '';
             const bytes = new Uint8Array(buffer);
@@ -256,41 +338,29 @@
             for (let i = 0; i < len; i++) {
                 binary += String.fromCharCode(bytes[i]);
             }
-            // Use btoa for Base64 encoding, then replace characters for URL safety
-            // and remove padding.
             return btoa(binary)
                 .replace(/\+/g, '-')
                 .replace(/\//g, '_')
                 .replace(/=+$/, '');
         }
 
-        /**
-         * Generates a deterministic password using Web Cryptography API (PBKDF2).
-         * @param {string} masterPassphrase - The user's secret master passphrase.
-         * @param {string} serviceName - A unique identifier for the service.
-         * @returns {Promise<string>} - A promise that resolves with the generated password.
-         */
         async function generateDeterministicPassword(masterPassphrase, serviceName) {
             if (!masterPassphrase || !serviceName) {
-                showMessage("Master passphrase and service name cannot be empty.", 'error');
-                return "";
+                return null; // Indicate failure
             }
 
             try {
-                // Convert passphrase and service name to ArrayBuffers
-                const passphraseBuffer = masterPassphrase.length > 0 ? strToArrayBuffer(masterPassphrase) : new ArrayBuffer(0); // Handle empty passphrase
-                const serviceNameBuffer = serviceName.length > 0 ? strToArrayBuffer(serviceName) : new ArrayBuffer(0); // Handle empty service name
+                const passphraseBuffer = strToArrayBuffer(masterPassphrase);
+                const serviceNameBuffer = strToArrayBuffer(serviceName);
 
-                // Import the master passphrase as a CryptoKey
                 const key = await crypto.subtle.importKey(
                     'raw',
                     passphraseBuffer,
                     { name: 'PBKDF2' },
-                    false, // Not extractable
+                    false,
                     ['deriveBits']
                 );
 
-                // Define the PBKDF2 parameters
                 const pbkdf2Params = {
                     name: 'PBKDF2',
                     salt: serviceNameBuffer,
@@ -298,56 +368,49 @@
                     hash: 'SHA-256'
                 };
 
-                // Derive the key bits
                 const derivedBits = await crypto.subtle.deriveBits(
                     pbkdf2Params,
                     key,
-                    DERIVED_KEY_LENGTH * 8 // Length in bits
+                    DERIVED_KEY_LENGTH * 8
                 );
 
-                // Convert derived bits to Base64 URL-safe string
                 const passwordRaw = arrayBufferToBase64Url(derivedBits);
-
-                // Truncate to desired final length
                 const finalPassword = passwordRaw.substring(0, FINAL_PASSWORD_LENGTH);
 
                 return finalPassword;
 
             } catch (error) {
                 console.error("Error generating password:", error);
-                showMessage("An error occurred during password generation. Check console for details.", 'error');
-                return "";
+                return null;
             }
         }
 
-        // Event Listener for Generate Button
         generateButton.addEventListener('click', async () => {
-            generateButton.disabled = true; // Disable button during generation
+            generateButton.disabled = true;
             generateButton.textContent = 'Generating...';
-            generatedPasswordSpan.textContent = ''; // Clear previous password
-            passwordDisplayContainer.classList.add('hidden'); // Hide display
+            generatedPasswordSpan.textContent = '';
+            passwordDisplayContainer.classList.add('hidden');
 
             const masterPassphrase = masterPassphraseInput.value;
             const serviceName = serviceNameInput.value.trim();
 
             const generatedPassword = await generateDeterministicPassword(masterPassphrase, serviceName);
 
-            if (generatedPassword) {
+            if (generatedPassword !== null) {
                 generatedPasswordSpan.textContent = generatedPassword;
                 passwordDisplayContainer.classList.remove('hidden');
                 showMessage("Password generated successfully!", 'success');
+            } else {
+                showMessage("Password generation failed. Please ensure both passphrase and service name are entered.", 'error');
             }
 
-            generateButton.disabled = false; // Re-enable button
+            generateButton.disabled = false;
             generateButton.textContent = 'Generate Password';
         });
 
-        // Event Listener for Copy Button
         copyButton.addEventListener('click', () => {
             const passwordToCopy = generatedPasswordSpan.textContent;
             if (passwordToCopy) {
-                // Using document.execCommand('copy') as navigator.clipboard.writeText()
-                // might have restrictions in some iframe environments or older browsers.
                 const tempInput = document.createElement('textarea');
                 tempInput.value = passwordToCopy;
                 document.body.appendChild(tempInput);
@@ -363,7 +426,6 @@
             }
         });
 
-        // Optional: Add a listener to clear message box and password display on input change
         masterPassphraseInput.addEventListener('input', () => {
             messageBox.classList.remove('show');
             passwordDisplayContainer.classList.add('hidden');
@@ -372,7 +434,6 @@
             messageBox.classList.remove('show');
             passwordDisplayContainer.classList.add('hidden');
         });
-
     </script>
 </body>
 </html>
