@@ -135,21 +135,8 @@
             color: #b45309; /* Darker orange for emphasis */
         }
 
-        /* How it Works Banner */
-        .how-it-works-banner {
-            background-color: #dbeafe; /* Light blue */
-            border: 1px solid #93c5fd; /* Blue border */
-            border-radius: 0.75rem;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            color: #1e3a8a; /* Dark blue text */
-            text-align: center;
-            line-height: 1.4;
-        }
-        .how-it-works-banner strong {
-            color: #1e40af; /* Even darker blue for emphasis */
-        }
+        /* Removed How it Works Banner styles */
+        /* .how-it-works-banner { ... } */
 
         /* Styles for the expandable info sections */
         .expandable-info {
@@ -209,16 +196,21 @@
             text-align: left; /* Aligns content to the left */
             margin-top: 0.5rem; /* Adjust margin as needed */
         }
+        .subtitle {
+            font-size: 1rem; /* Smaller font size for subtitle */
+            color: #475569; /* Slate 600 */
+            text-align: center;
+            margin-top: -0.5rem; /* Pull it closer to the H1 */
+            margin-bottom: 1.5rem; /* Space below the subtitle */
+            font-weight: 500; /* Slightly bolder */
+            color: #334155; /* Slightly darker color */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-3xl font-extrabold text-center text-gray-900 mb-8">ZenPass: Your Master Key to Infinite Passwords</h1>
-
-        <!-- How it Works Info Banner -->
-        <div class="how-it-works-banner">
-            <p>Generate unique, strong passwords from one <b>Master Passphrase</b> for all your accounts. No storage, no fees, ultimate privacy!</p>
-        </div>
+        <h1 class="text-3xl font-extrabold text-center text-gray-900 mb-2">ZenPass: Your Master Key to Infinite Passwords</h1>
+        <p class="subtitle">Generate unique, strong passwords from one <b>Master Passphrase</b> for all your accounts. No storage, no fees, ultimate privacy!</p>
 
         <!-- Button to explain how it works - Now an icon with text -->
         <div class="how-it-works-button-container">
