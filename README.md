@@ -19,14 +19,14 @@ Are you tired of...
     
 - **Always the Same Password, Anywhere:** ZenPass uses a deterministic algorithm. This means the same Master Passphrase and Service Name (e.g., "Google" or "MyBank") will _always_ generate the _exact same unique password_, every single time, on any device. No sync needed, no cloud storage, no fuss.
     
-- **Access Your Passwords, Anywhere, Anytime:** Since the generation happens locally in your browser, you can use ZenPass on any device, anywhere in the world, without needing to install software or access your "vault." Just open the link, enter your two inputs, and your password is there.
+- **Access Your Passwords, Anywhere, Anytime:** Since the generation happens locally in your browser, you can use ZenPass on any device, anywhere in the world, without needing to install software or access your "vault". Just open the link, enter your two inputs, and your password is there.
     
 - **Zero Storage, Ultimate Privacy:** Your Master Passphrase and generated passwords are _never_ sent to a server, _never_ stored, and vanish from memory when you close the browser. This is the ultimate in privacy and security – if we don't store it, it can't be stolen from us.
     
 - **Absolutely Free:** Enjoy robust security without subscription fees or hidden costs.
     
 
-### How It Works (The Simple Version):
+### How It Works:
 
 1. **Enter Your Master Passphrase:** Your secret, personal key.
     
