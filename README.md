@@ -1,4 +1,4 @@
-# 🧘 ZenPass: Your Master Key to Infinite Passwords. Finally, Password Peace.
+# 🧘 PasswordOcean: Your Master Key to Infinite Passwords. Finally, Password Peace.
 
 Are you tired of...
 
@@ -9,17 +9,17 @@ Are you tired of...
 - Worrying about what happens if a service you use gets hacked?
     
 
-### Unlock True Password Freedom with ZenPass!
+### Unlock True Password Freedom with PasswordOcean!
 
-**ZenPass** is not just another password generator; it's your personal, client-side cryptographic key to a world of secure, unique passwords, all derived from **one master passphrase you already remember.**
+**PasswordOcean** is not just another password generator; it's your personal, client-side cryptographic key to a world of secure, unique passwords, all derived from **one master passphrase you already remember.**
 
 #### ✨ Our Unique Proposition:
 
-- **One Passphrase, Infinite Passwords:** Forget remembering a different complex password for every account. With ZenPass, your single, powerful Master Passphrase is the only key you'll ever need to recall.
+- **One Passphrase, Infinite Passwords:** Forget remembering a different complex password for every account. With PasswordOcean, your single, powerful Master Passphrase is the only key you'll ever need to recall.
     
-- **Always the Same Password, Anywhere:** ZenPass uses a deterministic algorithm. This means the same Master Passphrase and Service Name (e.g., "Google" or "MyBank") will _always_ generate the _exact same unique password_, every single time, on any device. No sync needed, no cloud storage, no fuss.
+- **Always the Same Password, Anywhere:** PasswordOcean uses a deterministic algorithm. This means the same Master Passphrase and Service Name (e.g., "Google" or "MyBank") will _always_ generate the _exact same unique password_, every single time, on any device. No sync needed, no cloud storage, no fuss.
     
-- **Access Your Passwords, Anywhere, Anytime:** Since the generation happens locally in your browser, you can use ZenPass on any device, anywhere in the world, without needing to install software or access your "vault". Just open the link, enter your two inputs, and your password is there.
+- **Access Your Passwords, Anywhere, Anytime:** Since the generation happens locally in your browser, you can use PasswordOcean on any device, anywhere in the world, without needing to install software or access your "vault". Just open the link, enter your two inputs, and your password is there.
     
 - **Zero Storage, Ultimate Privacy:** Your Master Passphrase and generated passwords are _never_ sent to a server, _never_ stored, and vanish from memory when you close the browser. This is the ultimate in privacy and security – if we don't store it, it can't be stolen from us.
     
@@ -39,6 +39,6 @@ Are you tired of...
 
 ### Ready for Password Peace?
 
-Stop compromising your security for convenience. With ZenPass, you get both.
+Stop compromising your security for convenience. With PasswordOcean, you get both.
 
-**Try [ZenPass](https://shubh18s.github.io/zenpass/zenpass.html) today and experience the future of personal password management!** 
+**Try [PasswordOcean](https://shubh18s.github.io/PasswordOcean/PasswordOcean.html) today and experience the future of personal password management!** 
