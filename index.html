@@ -74,22 +74,22 @@
         .hero-section {
             text-align: center;
             padding: 4rem 1.5rem;
-            color: #ffffff; /* White text for hero section */
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for readability */
+            color: #0c4a6e; /* Dark blue text for hero section - Made more prominent */
+            /* Removed text-shadow as it's typically for light text on dark backgrounds */
             margin-bottom: 2rem;
         }
 
         .hero-tagline {
-            font-size: 2.5rem; /* Larger font for tagline */
+            font-size: 3rem; /* Larger font for tagline */
             font-weight: 900; /* Extra bold */
             line-height: 1.2;
             margin-bottom: 1rem;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.5rem; /* Larger font for subtitle */
             font-weight: 500;
-            opacity: 0.9;
+            opacity: 1; /* Removed opacity */
         }
 
         .container {
@@ -496,40 +496,40 @@
                 .replace(/=+$/, '');
         }
 
-        async function generateDeterministicPassword(masterPassphrase, serviceName) {
-            if (!masterPassphrase || !serviceName) {
+        async function generateDeterministicPassword(master_passphrase, service_name) {
+            if (!master_passphrase || !service_name) {
                 return null; // Indicate failure
             }
 
             try {
-                const passphraseBuffer = strToArrayBuffer(masterPassphrase);
-                const serviceNameBuffer = strToArrayBuffer(serviceName);
+                const passphrase_buffer = strToArrayBuffer(master_passphrase);
+                const service_name_buffer = strToArrayBuffer(service_name);
 
                 const key = await crypto.subtle.importKey(
                     'raw',
-                    passphraseBuffer,
+                    passphrase_buffer,
                     { name: 'PBKDF2' },
                     false,
                     ['deriveBits']
                 );
 
-                const pbkdf2Params = {
+                const pbkdf2_params = {
                     name: 'PBKDF2',
-                    salt: serviceNameBuffer,
+                    salt: service_name_buffer,
                     iterations: PBKDF2_ITERATIONS,
                     hash: 'SHA-256'
                 };
 
-                const derivedBits = await crypto.subtle.deriveBits(
-                    pbkdf2Params,
+                const derived_bits = await crypto.subtle.deriveBits(
+                    pbkdf2_params,
                     key,
                     DERIVED_KEY_LENGTH * 8
                 );
 
-                const passwordRaw = arrayBufferToBase64Url(derivedBits);
-                const finalPassword = passwordRaw.substring(0, FINAL_PASSWORD_LENGTH);
+                const password_raw = arrayBufferToBase64Url(derived_bits);
+                const final_password = password_raw.substring(0, FINAL_PASSWORD_LENGTH);
 
-                return finalPassword;
+                return final_password;
 
             } catch (error) {
                 console.error("Error generating password:", error);
@@ -543,13 +543,13 @@
             generatedPasswordSpan.textContent = '';
             passwordDisplayContainer.classList.add('hidden');
 
-            const masterPassphrase = masterPassphraseInput.value;
-            const serviceName = serviceNameInput.value.trim();
+            const master_passphrase = masterPassphraseInput.value;
+            const service_name = serviceNameInput.value.trim();
 
-            const generatedPassword = await generateDeterministicPassword(masterPassphrase, serviceName);
+            const generated_password = await generateDeterministicPassword(master_passphrase, service_name);
 
-            if (generatedPassword !== null) {
-                generatedPasswordSpan.textContent = generatedPassword;
+            if (generated_password !== null) {
+                generatedPasswordSpan.textContent = generated_password;
                 passwordDisplayContainer.classList.remove('hidden');
                 showMessage("Password generated successfully!", 'success');
             } else {
@@ -561,12 +561,12 @@
         });
 
         copyButton.addEventListener('click', () => {
-            const passwordToCopy = generatedPasswordSpan.textContent;
-            if (passwordToCopy) {
-                const tempInput = document.createElement('textarea');
-                tempInput.value = passwordToCopy;
-                document.body.appendChild(tempInput);
-                tempInput.select();
+            const password_to_copy = generatedPasswordSpan.textContent;
+            if (password_to_copy) {
+                const temp_input = document.createElement('textarea');
+                temp_input.value = password_to_copy;
+                document.body.appendChild(temp_input);
+                temp_input.select();
                 try {
                     document.execCommand('copy');
                     showMessage("Password copied to clipboard!", 'success');
@@ -574,7 +574,7 @@
                     console.error('Failed to copy text: ', err);
                     showMessage("Failed to copy password. Please copy manually.", 'error');
                 }
-                document.body.removeChild(tempInput);
+                document.body.removeChild(temp_input);
             }
         });
 
