@@ -386,6 +386,12 @@
                 <input type="text" id="serviceName" placeholder="e.g., Google, Facebook, MyBank" class="focus:ring-indigo-600 focus:border-indigo-600">
             </div>
 
+            <!-- Honeypot field - hidden from real users but bots might fill it -->
+            <div style="position: absolute; left: -9999px;">
+                <label for="email_trap">Don't fill this out:</label>
+                <input type="text" id="email_trap" name="email_trap" tabindex="-1" autocomplete="off">
+            </div>
+
             <button id="generateButton" class="w-full mb-6 main-button">Generate Password</button>
 
             <div id="passwordDisplayContainer" class="hidden">
@@ -422,7 +428,8 @@
         const passwordDisplayContainer = document.getElementById('passwordDisplayContainer');
         const copyButton = document.getElementById('copyButton');
         const messageBox = document.getElementById('messageBox');
-
+        const emailTrapInput = document.getElementById('email_trap'); // Get the honeypot field
+        
         // Toggle buttons and content divs
         const toggleDetailedHowItWorksButton = document.getElementById('toggleDetailedHowItWorks');
         const detailedHowItWorksContent = document.getElementById('detailedHowItWorksContent');
@@ -539,6 +546,13 @@
         }
 
         async function sendClickEvent() {
+
+            // Check the honeypot field before sending the event
+            if (emailTrapInput.value) {
+                console.warn('Honeypot field filled. Likely a bot. Not sending click event.');
+                return; // Do not send the event for counter
+            }
+            
             try {
                 await fetch(API_GATEWAY_URL, {
                     method: 'POST',
