@@ -414,6 +414,7 @@
         const DERIVED_KEY_LENGTH = 32;
         const FINAL_PASSWORD_LENGTH = 24;
 
+        const API_GATEWAY_URL = 'https://981znzmtrh.execute-api.ap-southeast-2.amazonaws.com/v1/clicks';
         const masterPassphraseInput = document.getElementById('masterPassphrase');
         const serviceNameInput = document.getElementById('serviceName');
         const generateButton = document.getElementById('generateButton');
@@ -537,6 +538,27 @@
             }
         }
 
+        async function sendClickEvent() {
+            try {
+                await fetch(API_GATEWAY_URL, {
+                    method: 'POST',
+                    mode: 'cors', // Ensure CORS is enabled
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        // Send any non-sensitive data here if needed,
+                        // e.g., 'event_type': 'generate_password_click'
+                        // For a simple counter, an empty body is fine.
+                    }),
+                });
+                console.log('Click event sent to Lambda.');
+            } catch (error) {
+                console.error('Failed to send click event to Lambda:', error);
+            }
+        }
+
+        
         generateButton.addEventListener('click', async () => {
             generateButton.disabled = true;
             generateButton.textContent = 'Generating...';
@@ -552,6 +574,7 @@
                 generatedPasswordSpan.textContent = generated_password;
                 passwordDisplayContainer.classList.remove('hidden');
                 showMessage("Password generated successfully!", 'success');
+                sendClickEvent();
             } else {
                 showMessage("Password generation failed. Please ensure both passphrase and service name are entered.", 'error');
             }
