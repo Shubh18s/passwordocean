@@ -20,7 +20,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #e0f2fe; /* Light blue fallback background */
-            background-image: url('https://placehold.co/1920x1080/E0F2FE/0C4A6E/png?text=Abstract+Ocean+Waves'); /* Abstract ocean waves placeholder */
+            /* Removed background-image property */
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
@@ -306,7 +306,17 @@
             width: 1.25rem;
             height: 1.25rem;
         }
-        /* Removed .hit-counter styles as the element is removed */
+        /* Style for the URL safety message */
+        .url-safety-message {
+            font-size: 0.85rem;
+            color: #525252; /* Darker gray for subtle text */
+            text-align: center;
+            margin-bottom: 0.5rem; /* Space between message and input field */
+            font-weight: 500;
+        }
+        .url-safety-message strong {
+            color: #0a58ca; /* Emphasize the URL */
+        }
     </style>
 </head>
 <body>
@@ -348,9 +358,16 @@
                     <li>**Retrieve Anytime:** To get the password again, just re-enter your Master Passphrase and the exact Service Name.</li>
                 </ul>
                 <p class="mt-3 text-gray-700">PasswordOcean is a generator, not a storage solution. You can either remember one Master Passphrase to generate them all, or save these unique passwords in your favorite password manager.</p>
+                <!-- Offline test suggestion moved here -->
+                <p class="mt-3 text-gray-700">You can even test that nothing leaves your machine/browser or is sent to the internet by <strong>turning off your internet connection before generating a password. It will still work perfectly!</strong></p>
             </div>
 
             <div id="messageBox" class="message-box" role="alert"></div>
+
+            <!-- URL Safety Message moved here -->
+            <div class="url-safety-message">
+                <p><strong>For your safety:</strong> Please ensure you're on the correct URL - <strong>www.passwordocean.com</strong></p>
+            </div>
 
             <div class="mb-5">
                 <label for="masterPassphrase" class="block text-gray-800 text-base font-semibold mb-2">Master Passphrase:</label>
