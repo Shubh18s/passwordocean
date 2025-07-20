@@ -1,6 +1,6 @@
 ### How the Password Generation Works
 
-The ZenPass password generation relies on a cryptographic function called **PBKDF2 (Password-Based Key Derivation Function 2)** combined with **HMAC-SHA256**. Here's the step-by-step process:
+The PasswordOcean password generation relies on a cryptographic function called **PBKDF2 (Password-Based Key Derivation Function 2)** combined with **HMAC-SHA256**. Here's the step-by-step process:
 
 1.  **Inputs:**
     * **Master Passphrase:** This is your secret, strong passphrase that you remember.
@@ -21,7 +21,7 @@ Because this process is **deterministic**, providing the exact same Master Passp
 ### Why It's a Safe Solution
 
 1.  **Client-Side Processing:** All the cryptographic operations happen directly in your web browser. Your Master Passphrase is **never** sent over the internet to any server. This eliminates the risk of your passphrase being intercepted or stored on a remote server.
-2.  **No Storage:** ZenPass does not store your Master Passphrase, Service Names, or generated passwords anywhere. As soon as you close the browser tab or window, all sensitive data is cleared from memory. There's no database to hack, no server to breach.
+2.  **No Storage:** PasswordOcean does not store your Master Passphrase, Service Names, or generated passwords anywhere. As soon as you close the browser tab or window, all sensitive data is cleared from memory. There's no database to hack, no server to breach.
 3.  **Unique Passwords per Service:** The use of the Service Name as a unique salt ensures that even if you use the same Master Passphrase for all your accounts, each generated password will be distinct. If one service is compromised, it doesn't affect your passwords for other services.
 4.  **Strong Cryptography:** PBKDF2-HMAC-SHA256 is a widely recognized and secure key derivation function recommended by NIST (National Institute of Standards and Technology). The high iteration count (600,000) makes it extremely resistant to brute-force attacks.
 
@@ -34,4 +34,4 @@ However, the weakest link in any password system is almost always the **user's i
 * **Weak Master Passphrase:** If your Master Passphrase is short, simple, or easily guessable (e.g., "password123", "yourname"), an attacker could potentially brute-force it using a dictionary attack or by trying common patterns. Even with 600,000 iterations, a very weak passphrase could still be cracked.
 * **Inconsistent Service Names:** If you don't consistently use the *exact same* Service Name (including capitalization and spacing) for a given account, you won't be able to regenerate the correct password. This isn't a security flaw, but a usability one.
 
-In summary, while the underlying cryptographic algorithm is robust, the security of your generated passwords ultimately depends on the **strength and secrecy of your Master Passphrase**. Choose a long, complex, and unique Master Passphrase that you can remember, and ZenPass will provide strong, unique passwords for all your online needs.
+In summary, while the underlying cryptographic algorithm is robust, the security of your generated passwords ultimately depends on the **strength and secrecy of your Master Passphrase**. Choose a long, complex, and unique Master Passphrase that you can remember, and PasswordOcean will provide strong, unique passwords for all your online needs.
