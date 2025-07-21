@@ -12,6 +12,36 @@
     <link rel="stylesheet" href="password_ocean_style.css">
 </head>
 <body>
+    <!-- Public Beta Banner (optional, but good for consistency) -->
+    <div class="beta-banner">
+        PasswordOcean is currently in **Public Beta**. Your feedback helps us improve!
+    </div>
+    
+    <!-- Header Section (consistent with main page) -->
+    <header class="header-section" id="mainHeader">
+        <div class="header-logo-container">
+            <img src="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌊</text></svg>" alt="PasswordOcean Icon" class="header-icon">
+            <span class="header-title">PasswordOcean</span>
+        </div>
+        
+        <!-- Hamburger Menu Icon (for mobile) -->
+        <button class="hamburger-menu" id="hamburgerMenu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="header-nav-links">
+            <a href="privacy_policy.html">Privacy Policy</a>
+            <a href="about_us.html">About Us</a>
+        </nav>
+
+        <!-- Mobile Navigation Links (Dropdown) -->
+        <nav class="mobile-nav-links" id="mobileNavLinks">
+            <a href="privacy_policy.html">Privacy Policy</a>
+            <a href="about_us.html">About Us</a>
+        </nav>
+    </header>
+    <main>
     <div class="content-wrapper">
         
         <h1>Privacy Policy for PasswordOcean</h1>
@@ -76,5 +106,24 @@
         <a href="mailto:passwordocean.generator@gmail.com">passocean.generator@gmail.com</a></p>
     </div>
     <a href="index.html" class="back-link">← Back to PasswordOcean</a>
+    </main>
+    <script>
+        // This script is for the mobile navigation toggle, consistent across all pages
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileNavLinks = document.getElementById('mobileNavLinks');
+        const mainHeader = document.getElementById('mainHeader');
+
+        hamburgerMenu.addEventListener('click', () => {
+            mobileNavLinks.classList.toggle('hidden');
+            mainHeader.classList.toggle('expanded');
+        });
+
+        mobileNavLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavLinks.classList.add('hidden');
+                mainHeader.classList.remove('expanded');
+            });
+        });
+    </script>
 </body>
 </html>
