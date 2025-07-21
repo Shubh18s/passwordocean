@@ -329,6 +329,28 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 100; /* Ensure it's above other content but below header */
         }
+        
+        /* Header Navigation Links */
+        .header-nav-links {
+            display: flex;
+            gap: 1.5rem; /* Space between links */
+        }
+        .header-nav-links a {
+            color: #0c4a6e; /* Dark blue, matching header title */
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        .header-nav-links a:hover {
+            color: #007bff; /* Brighter blue on hover */
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
     </style>
 </head>
 <body>
