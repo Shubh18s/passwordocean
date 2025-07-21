@@ -544,6 +544,10 @@
         const eyeOpenIcon = document.getElementById('eyeOpen');
         const eyeClosedIcon = document.getElementById('eyeClosed');
 
+        // Mobile navigation elements
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileNavLinks = document.getElementById('mobileNavLinks');
+        const mainHeader = document.getElementById('mainHeader');
 
         /**
          * Toggles the visibility of an element and rotates the SVG icon.
@@ -571,6 +575,19 @@
             eyeClosedIcon.classList.toggle('hidden', isPassword);
         });
 
+        // Event listener for hamburger menu
+        hamburgerMenu.addEventListener('click', () => {
+            mobileNavLinks.classList.toggle('hidden');
+            mainHeader.classList.toggle('expanded'); // Add/remove expanded class to header for styling
+        });
+
+        // Close mobile menu if a link is clicked (optional, but good for UX)
+        mobileNavLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavLinks.classList.add('hidden');
+                mainHeader.classList.remove('expanded');
+            });
+        });
 
         function showMessage(message, type = 'info') {
             messageBox.textContent = message;
