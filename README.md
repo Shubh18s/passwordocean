@@ -41,4 +41,4 @@ Are you tired of...
 
 Stop compromising your security for convenience. With PasswordOcean, you get both.
 
-**Try [PasswordOcean](https://shubh18s.github.io/PasswordOcean/PasswordOcean.html) today and experience the future of personal password management!** 
+**Try [PasswordOcean](https://PasswordOcean.com/) today and experience the future of personal password management!** 
