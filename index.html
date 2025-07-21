@@ -344,6 +344,59 @@
             color: #007bff; /* Brighter blue on hover */
         }
 
+        /* Mobile navigation styles */
+        .hamburger-menu {
+            display: none; /* Hidden by default on larger screens */
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #0c4a6e;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav-links {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 100%; /* Position right below the header */
+            left: 0;
+            padding: 1rem 0;
+            border-radius: 0 0 0.75rem 0.75rem;
+            z-index: 999; /* Below sticky header but above content */
+        }
+
+        .mobile-nav-links a {
+            padding: 0.75rem 1.5rem;
+            color: #0c4a6e;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .mobile-nav-links a:hover {
+            background-color: #e0f2fe;
+        }
+
+        /* Media query for mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-nav-links {
+                display: none; /* Hide desktop nav links */
+            }
+            .hamburger-menu {
+                display: block; /* Show hamburger menu */
+            }
+            .header-section {
+                justify-content: space-between; /* Align logo and hamburger */
+            }
+            .header-section.expanded .mobile-nav-links {
+                display: flex; /* Show dropdown when expanded */
+            }
+        }
+
         /* Smooth scroll behavior */
         html {
             scroll-behavior: smooth;
