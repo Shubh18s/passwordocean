@@ -4,24 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | PasswordOcean</title>
-    <!-- Favicon: Ocean Wave Emoji -->
     <link rel="icon" href="password_ocean_logo.png" />
-    <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="password_ocean_style.css">
 </head>
 <body>
-    <!-- Public Beta Banner (optional, but good for consistency) -->
+    <!-- Public Beta Banner -->
     <div class="beta-banner">
-        PasswordOcean is currently in **Public Beta**. Your feedback helps us improve!
+        PasswordOcean is currently in <strong>Public Beta</strong>. Your feedback helps us improve!
     </div>
     
-    <!-- Header Section (consistent with main page) -->
     <header class="header-section" id="mainHeader">
         <div class="header-logo-container">
+            <a href="index.html" class="flex items-center gap-0.5">
             <img src="password_ocean_logo.png" alt="PasswordOcean Icon" class="header-icon">
             <span class="header-title">PasswordOcean</span>
+            </a>
         </div>
         
         <!-- Hamburger Menu Icon (for mobile) -->
@@ -108,23 +106,6 @@
     </div>
     
     </main>
-    <script>
-        // This script is for the mobile navigation toggle, consistent across all pages
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const mobileNavLinks = document.getElementById('mobileNavLinks');
-        const mainHeader = document.getElementById('mainHeader');
-
-        hamburgerMenu.addEventListener('click', () => {
-            mobileNavLinks.classList.toggle('hidden');
-            mainHeader.classList.toggle('expanded');
-        });
-
-        mobileNavLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNavLinks.classList.add('hidden');
-                mainHeader.classList.remove('expanded');
-            });
-        });
-    </script>
+    <script src="password_ocean_script.js"></script>
 </body>
 </html>

@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | PasswordOcean</title>
-    <!-- Favicon: Ocean Wave Emoji -->
     <link rel="icon" href="password_ocean_logo.png" />
-    <!-- Tailwind CSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Link to external CSS file -->
     <link rel="stylesheet" href="password_ocean_style.css">
 </head>
 <body>
-    <!-- Public Beta Banner (optional, but good for consistency) -->
+    <!-- Public Beta Banner -->
     <div class="beta-banner">
-        PasswordOcean is currently in **Public Beta**. Your feedback helps us improve!
+        PasswordOcean is currently in <strong>Public Beta</strong>. Your feedback helps us improve!
     </div>
     <header class="header-section" id="mainHeader">
         <div class="header-logo-container">
-            <!-- Updated logo source -->
+            <a href="index.html" class="flex items-center gap-0.5">
             <img src="password_ocean_logo.png" alt="PasswordOcean Logo" class="header-icon">
             <span class="header-title">PasswordOcean</span>
+            </a>
         </div>
         
         <!-- Hamburger Menu Icon (for mobile) -->
@@ -75,7 +73,7 @@
             <p>PasswordOcean was created by a passionate Data Engineer with a background in Data Science and extensive experience in highly regulated industries like banking and healthcare. This background instilled a deep understanding of the critical importance of data security, privacy, and building trustworthy systems.</p>
             <p>PasswordOcean is a personal project born from the desire to build a practical, ethical solution to a universal problem, demonstrating how robust data principles can be applied to enhance personal digital security in the age of AI.</p>
             
-            <!-- New Creator Profile Section -->
+            <!-- Creator Profile Section -->
             <h3>About the Creator</h3>
             <div class="creator-profile">
                 <img src="creator_avatar.jpg" alt="Creator's Profile Photo" class="profile-photo">
@@ -101,23 +99,6 @@
             <p><a href="mailto:passwordocean.generator@gmail.com">passwordocean.generator@gmail.com</a></p>
         </div>
     </main>
-    <script>
-        // This script is for the mobile navigation toggle, consistent across all pages
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const mobileNavLinks = document.getElementById('mobileNavLinks');
-        const mainHeader = document.getElementById('mainHeader');
-
-        hamburgerMenu.addEventListener('click', () => {
-            mobileNavLinks.classList.toggle('hidden');
-            mainHeader.classList.toggle('expanded');
-        });
-
-        mobileNavLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNavLinks.classList.add('hidden');
-                mainHeader.classList.remove('expanded');
-            });
-        });
-    </script>
+    <script src="password_ocean_script.js"></script>
 </body>
 </html>

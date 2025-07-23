@@ -3,474 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>PasswordOcean | Free, Secure, Client-Side Deterministic Password Generator</title>
     <meta name="description" content="PasswordOcean: Generate strong, unique, and private passwords from one master passphrase. Experience ultimate security with our free, client-side, no-storage password solution.">
-    <!-- Favicon: Ocean Wave Emoji -->
     <link rel="icon" href="password_ocean_logo.png" />
-    <!-- Tailwind CSS for mode rn styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Ensure hidden class works */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Custom styles for Inter font and general layout */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #e0f2fe; /* Light blue fallback background */
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            display: flex;
-            flex-direction: column; /* Arrange content vertically */
-            min-height: 100vh;
-            color: #334155; /* Default text color */
-        }
-
-        /* Main content area, allowing space for header and footer */
-        main {
-            flex-grow: 1; /* Allows main content to take up available space */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 1.5rem; /* Padding for main content */
-        }
-
-        .header-section {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white header */
-            backdrop-filter: blur(5px); /* Frosted glass effect */
-            padding: 1rem 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky; /* Makes header sticky */
-            top: 0;
-            z-index: 1000; /* Ensures header is on top */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap; /* Allow header content to wrap on smaller screens */
-        }
-
-        .header-logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .header-icon {
-            width: 3rem;
-            height: 3rem;
-        }
-
-        .header-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #0c4a6e; /* Dark blue for header title */
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 4rem 1.5rem;
-            color: #0c4a6e; /* Prominent dark blue text for hero section */
-            margin-bottom: 2rem;
-        }
-
-        .hero-tagline {
-            font-size: 3rem; /* Larger font for tagline */
-            font-weight: 900; /* Extra bold */
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem; /* Larger font for subtitle */
-            font-weight: 500;
-            opacity: 1; /* Removed opacity */
-        }
-
-        .container {
-            background-color: #ffffff;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            padding: 2.5rem;
-            max-width: 550px;
-            width: 100%;
-            border: 1px solid #cbd5e1;
-            margin-top: -4rem; /* Pull the card up into the hero section */
-            position: relative;
-            z-index: 10; /* Ensure it's above background but below header */
-        }
-        
-        input[type="password"],
-        input[type="text"] {
-            border-radius: 0.625rem;
-            border: 2px solid #e2e8f0;
-            padding: 0.875rem 1.125rem;
-            width: 100%;
-            font-size: 1.05rem;
-            background-color: #f8fafc;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
-        input[type="password"]:focus,
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.3);
-        }
-        .main-button {
-            background-color: #007bff !important;
-            color: #ffffff;
-            padding: 2rem 2rem;
-            border-radius: 0.625rem;
-            font-weight: 700;
-            font-size: 1.25rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
-            box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.15);
-            border: none;
-        }
-        .main-button:hover {
-            background-color: #0056b3 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.2);
-        }
-        .main-button:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        .message-box {
-            background-color: #e0f7fa;
-            color: #006064;
-            border: 1px solid #80deea;
-            padding: 1rem;
-            border-radius: 0.625rem;
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-            display: none;
-            font-weight: 500;
-        }
-        .message-box.show {
-            display: block;
-        }
-        .message-box.bg-red-100 { background-color: #fee2e2; border-color: #fca5a5; color: #b91c1c; }
-        .message-box.bg-green-100 { background-color: #dcfce7; border-color: #86efac; color: #16a34a; }
-        .message-box.bg-blue-100 { background-color: #e0f2fe; border-color: #7dd3fc; color: #0c4a6e; }
-
-        .password-display {
-            background-color: #f1f5f9;
-            color: #334155;
-            padding: 1rem;
-            border-radius: 0.625rem;
-            word-break: break-all;
-            font-family: 'monospace';
-            font-size: 1.15rem;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #cbd5e1;
-        }
-        .copy-button {
-            background-color: #28a745 !important;
-            color: white;
-            padding: 1.125rem 1.25rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .copy-button:hover {
-            background-color: #218838 !important;
-            transform: translateY(-1px);
-        }
-        .copy-button:active {
-            transform: translateY(0);
-            box-shadow: none;
-        }
-        /* Styling for the note after the button */
-        .button-note {
-            background-color: #fffbeb;
-            border: 1px solid #fcd34d;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-top: 1.25rem;
-            font-size: 0.875rem;
-            color: #78350f;
-            line-height: 1.4;
-        }
-        .button-note strong {
-            color: #b45309;
-        }
-
-        /* Styles for the expandable info sections */
-        .expandable-info {
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            padding: 1rem 1.25rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #475569;
-        }
-        .expandable-info h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-        .expandable-info ul {
-            list-style: disc;
-            margin-left: 1.25rem;
-            padding-left: 0;
-            margin-top: 0.5rem;
-        }
-        .expandable-info li {
-            margin-bottom: 0.25rem;
-        }
-        .expandable-info p {
-            margin-bottom: 1rem; /* Space between paragraphs */
-        }
-        /* Styling for the icon toggle button */
-        .toggle-icon-button {
-            background-color: transparent;
-            border: none;
-            color: #94a3b8;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.2rem;
-            margin-bottom: 1rem;
-        }
-        .toggle-icon-button:hover {
-            color: #64748b;
-            background-color: #e2e8f0;
-        }
-        .toggle-icon-button svg {
-            width: 1rem;
-            height: 1rem;
-            transition: transform 0.2s ease-in-out;
-        }
-        .toggle-icon-button.expanded svg {
-            transform: rotate(180deg);
-        }
-        .how-it-works-button-container {
-            text-align: left;
-            margin-top: 0.5rem;
-        }
-        .footer-link {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-        .footer-link a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .footer-link a:hover {
-            text-decoration: underline;
-        }
-        .input-group {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-        .input-group input {
-            flex-grow: 1;
-            padding-right: 3rem;
-        }
-        .toggle-password-visibility {
-            position: absolute;
-            right: 0.75rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: #64748b;
-            transition: color 0.2s ease-in-out;
-        }
-        .toggle-password-visibility:hover {
-            color: #1e293b;
-        }
-        .toggle-password-visibility svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-        /* Style for the URL safety message */
-        .url-safety-message {
-            font-size: 0.85rem;
-            color: #525252; /* Darker gray for subtle text */
-            text-align: center;
-            margin-bottom: 0.5rem; /* Space between message and input field */
-            font-weight: 500;
-        }
-        .url-safety-message strong {
-            color: #0a58ca; /* Emphasize the URL */
-        }
-        /* Style for the Public Beta Banner */
-        .beta-banner {
-            background-color: #fcd34d; /* Yellow background */
-            color: #78350f; /* Dark brown text */
-            text-align: center;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 100; /* Ensure it's above other content but below header */
-        }
-        
-        /* Styles for the benefits list */
-        .benefits-list {
-            background-color: #ecfdf5; /* Light green background */
-            border: 1px solid #a7f3d0; /* Green border */
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin-top: 2rem; /* Space from hero section */
-            margin-bottom: 2rem; /* Space before container */
-            max-width: 550px; /* Reverted to main container width */
-            width: 100%;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            text-align: left; /* Align the entire list content to the left */
-        }
-        .benefits-list ul {
-            list-style: none; /* Remove default list style */
-            padding: 0;
-            margin: 0;
-        }
-        .benefits-list li {
-            display: flex;
-            align-items: flex-start; /* Align icon and text at the top */
-            margin-bottom: 0.9rem; /* Increased margin for more space */
-            font-size: 1.05rem; /* Slightly increased font size */
-            color: #065f46; /* Dark green text */
-            line-height: 1.5; /* Increased line height for better readability */
-            white-space: normal; /* Allow text to wrap */
-        }
-        .benefits-list li:last-child {
-            margin-bottom: 0; /* No margin for the last item */
-        }
-        .benefits-list .check-icon {
-            flex-shrink: 0; /* Prevent icon from shrinking */
-            width: 1.35rem; /* Slightly larger icon */
-            height: 1.35rem;
-            color: #10b981; /* Brighter green for the icon */
-            margin-right: 0.85rem; /* Increased space between icon and text */
-            margin-top: 0.1rem; /* Slight adjustment for vertical alignment */
-        }
-        
-        
-        /* Header Navigation Links */
-        .header-nav-links {
-            display: flex;
-            gap: 1.5rem; /* Space between links */
-        }
-        .header-nav-links a {
-            color: #0c4a6e; /* Dark blue, matching header title */
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.2s ease-in-out;
-        }
-        .header-nav-links a:hover {
-            color: #007bff; /* Brighter blue on hover */
-        }
-
-        /* Mobile navigation styles */
-        .hamburger-menu {
-            display: none; /* Hidden by default on larger screens */
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #0c4a6e;
-            padding: 0.5rem;
-        }
-
-        .mobile-nav-links {
-            display: none; /* Hidden by default */
-            flex-direction: column;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            top: 100%; /* Position right below the header */
-            left: 0;
-            padding: 1rem 0;
-            border-radius: 0 0 0.75rem 0.75rem;
-            z-index: 999; /* Below sticky header but above content */
-        }
-
-        .mobile-nav-links a {
-            padding: 0.75rem 1.5rem;
-            color: #0c4a6e;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s ease-in-out;
-        }
-
-        .mobile-nav-links a:hover {
-            background-color: #e0f2fe;
-        }
-
-        /* Media query for mobile responsiveness */
-        @media (max-width: 768px) {
-            .header-nav-links {
-                display: none; /* Hide desktop nav links */
-            }
-            .hamburger-menu {
-                display: block; /* Show hamburger menu */
-            }
-            .header-section {
-                justify-content: space-between; /* Align logo and hamburger */
-            }
-            .header-section.expanded .mobile-nav-links {
-                display: flex; /* Show dropdown when expanded */
-            }
-        }
-
-        /* Smooth scroll behavior */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="password_ocean_style.css">
 </head>
 <body>
     <!-- Public Beta Banner -->
     <div class="beta-banner">
-        PasswordOcean is currently in **Public Beta**. Your feedback helps us improve!
+        PasswordOcean is currently in <strong>Public Beta</strong>. Your feedback helps us improve!
     </div>
-    
-    <!-- Header Section -->
-    <header class="header-section">
-        <div class="header-logo-container">
-            <img src="password_ocean_logo.png" alt="PasswordOcean Icon" class="header-icon">
-            <span class="header-title">PasswordOcean</span>
-        </div>
 
+    <!-- Header Section -->
+    <header class="header-section" id="mainHeader">
+        <div class="header-logo-container">
+            <a href="index.html" class="flex items-center gap-0.5">
+                <img src="password_ocean_logo.png" alt="PasswordOcean Logo" class="header-icon">
+                <span class="header-title">PasswordOcean</span>
+            </a>
+        </div>
+        
         <!-- Hamburger Menu Icon (for mobile) -->
         <button class="hamburger-menu" id="hamburgerMenu">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
-        
+
         <!-- Desktop Navigation Links -->
         <nav class="header-nav-links">
             <a href="privacy_policy.html">Privacy Policy</a>
             <a href="about_us.html">About Us</a>
         </nav>
-        
+
         <!-- Mobile Navigation Links (Dropdown) -->
         <nav class="mobile-nav-links" id="mobileNavLinks">
             <a href="privacy_policy.html">Privacy Policy</a>
@@ -482,18 +47,16 @@
     <main>
         <div class="hero-section">
             <h1 class="hero-tagline">One Passphrase. Infinite Passwords. Uniquely Salted.</h1>
-            <p class="hero-subtitle">Access all your passwords, anywhere, anytime! Our&nbsp;<b>free, secure, client-side password generator</b>&nbsp;offers ultimate privacy with no storage or fees.</p>
+            <p class="hero-subtitle">Access your secure, unique passwords anywhere, anytime. Our&nbsp;<b>free, client-side generator</b>&nbsp;offers ultimate privacy with no storage or fees.</p>
         </div>
-
+        
         <!-- Password Generator Container -->
         <div class="container">
-            <!-- Button to explain how it works -->
-            <div class="how-it-works-button-container">
-                <button id="toggleDetailedHowItWorks" class="toggle-icon-button">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    How It Works
-                </button>
-            </div>
+            <!-- Dropdown for "How It Works" -->
+            <h3 id="toggleDetailedHowItWorks" class="how-it-works-toggle-heading">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                How It Works
+            </h3>
 
             <!-- Expandable Detailed How It Works Section -->
             <div id="detailedHowItWorksContent" class="expandable-info hidden">
@@ -506,14 +69,13 @@
                     <li><b>Close Browser:</b>&nbsp;When you close the browser, all sensitive data vanishes from memory.</li>
                     <li><b>Retrieve Anytime:</b>&nbsp;To get the password again, just re-enter your Master Passphrase and the exact Service Name.</li>
                 </ul>
-                <p class="mt-3 text-gray-700">PasswordOcean is a generator, not a storage solution. You can either remember one Master Passphrase to generate them all, or save these unique passwords in your favorite password manager.</p>
-                <!-- Offline test suggestion moved here -->
-                <p class="mt-3 text-gray-700">You can even test that nothing leaves your machine/browser or is sent to the internet by <strong>turning off your internet connection before generating a password. It will still work perfectly!</strong></p>
+                <p class="mt-3 text-gray-700">PasswordOcean is a <strong>deterministic password generator</strong>, not a storage solution. You can either remember one Master Passphrase to generate them all, or save these generated, unique passwords in your favorite password manager.</p>
+                <p class="mt-3 text-gray-700">The <strong>password generation happens entirely within your browser</strong>. We only collect anonymous usage statistics to improve our service. Your passphrase and service name are <strong>never</strong> transmitted.</p>
             </div>
 
             <div id="messageBox" class="message-box" role="alert"></div>
 
-            <!-- URL Safety Message moved here -->
+            <!-- URL Safety Message -->
             <div class="url-safety-message">
                 <p><strong>For your safety:</strong> Please ensure you're on the correct URL - <strong>www.passwordocean.com</strong></p>
             </div>
@@ -551,7 +113,7 @@
                 </div>
             </div>
 
-            <!-- Important Note for the user - Moved after password display -->
+            <!-- Important Note for the user -->
             <div class="button-note mt-6">
                 <p><strong>Important Note:</strong> PasswordOcean does not store any passwords. Your passwords are regenerated each time you provide your Master Passphrase and the exact Service Name. Therefore, we highly recommend using a different, easily recoverable password for your recovery email account, in case you ever forget your Master Passphrase or a specific Service Name.</p>
             </div>
@@ -562,233 +124,6 @@
             </div>
         </div>
     </main>
-
-    <script>
-        // --- Configuration ---
-        const PBKDF2_ITERATIONS = 600000;
-        const DERIVED_KEY_LENGTH = 32;
-        const FINAL_PASSWORD_LENGTH = 24;
-
-        const API_GATEWAY_URL = 'https://981znzmtrh.execute-api.ap-southeast-2.amazonaws.com/v1/clicks';
-        const masterPassphraseInput = document.getElementById('masterPassphrase');
-        const serviceNameInput = document.getElementById('serviceName');
-        const generateButton = document.getElementById('generateButton');
-        const generatedPasswordSpan = document.getElementById('generatedPassword');
-        const passwordDisplayContainer = document.getElementById('passwordDisplayContainer');
-        const copyButton = document.getElementById('copyButton');
-        const messageBox = document.getElementById('messageBox');
-        const emailTrapInput = document.getElementById('email_trap'); // Get the honeypot field
-        
-        // Toggle buttons and content divs
-        const toggleDetailedHowItWorksButton = document.getElementById('toggleDetailedHowItWorks');
-        const detailedHowItWorksContent = document.getElementById('detailedHowItWorksContent');
-
-        // Password visibility toggle elements
-        const togglePasswordVisibilityButton = document.getElementById('togglePasswordVisibility');
-        const eyeOpenIcon = document.getElementById('eyeOpen');
-        const eyeClosedIcon = document.getElementById('eyeClosed');
-
-        // Mobile navigation elements
-        const hamburgerMenu = document.getElementById('hamburgerMenu');
-        const mobileNavLinks = document.getElementById('mobileNavLinks');
-        const mainHeader = document.getElementById('mainHeader');
-
-        /**
-         * Toggles the visibility of an element and rotates the SVG icon.
-         * @param {HTMLElement} contentElement - The element whose visibility to toggle.
-         * @param {HTMLElement} buttonElement - The button element containing the SVG icon.
-         */
-        function toggleVisibility(contentElement, buttonElement) {
-            contentElement.classList.toggle('hidden');
-            // Remove the expanded class if content is hidden, add if shown
-            if (contentElement.classList.contains('hidden')) {
-                buttonElement.classList.remove('expanded');
-            } else {
-                buttonElement.classList.add('expanded');
-            }
-        }
-
-        // Event listener for the "How It Works" toggle button
-        toggleDetailedHowItWorksButton.addEventListener('click', () => toggleVisibility(detailedHowItWorksContent, toggleDetailedHowItWorksButton));
-
-        // Event listener for password visibility toggle
-        togglePasswordVisibilityButton.addEventListener('click', () => {
-            const isPassword = masterPassphraseInput.type === 'password';
-            masterPassphraseInput.type = isPassword ? 'text' : 'password';
-            eyeOpenIcon.classList.toggle('hidden', !isPassword);
-            eyeClosedIcon.classList.toggle('hidden', isPassword);
-        });
-
-        // Event listener for hamburger menu
-        hamburgerMenu.addEventListener('click', () => {
-            mobileNavLinks.classList.toggle('hidden');
-            mainHeader.classList.toggle('expanded'); // Add/remove expanded class to header for styling
-        });
-
-        // Close mobile menu if a link is clicked (optional, but good for UX)
-        mobileNavLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNavLinks.classList.add('hidden');
-                mainHeader.classList.remove('expanded');
-            });
-        });
-
-        function showMessage(message, type = 'info') {
-            messageBox.textContent = message;
-            messageBox.classList.remove('bg-red-100', 'text-red-800', 'border-red-400',
-                                       'bg-green-100', 'text-green-800', 'border-green-400',
-                                       'bg-blue-100', 'text-blue-800', 'border-blue-400');
-            messageBox.className = 'message-box show';
-
-            if (type === 'error') {
-                messageBox.classList.add('bg-red-100', 'text-red-800', 'border-red-400');
-            } else if (type === 'success') {
-                messageBox.classList.add('bg-green-100', 'text-green-800', 'border-green-400');
-            } else {
-                messageBox.classList.add('bg-blue-100', 'text-blue-800', 'border-blue-400');
-            }
-            setTimeout(() => {
-                messageBox.classList.remove('show');
-            }, 5000);
-        }
-
-        function strToArrayBuffer(str) {
-            const encoder = new TextEncoder();
-            return encoder.encode(str).buffer;
-        }
-
-        function arrayBufferToBase64Url(buffer) {
-            let binary = '';
-            const bytes = new Uint8Array(buffer);
-            const len = bytes.byteLength;
-            for (let i = 0; i < len; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
-            return btoa(binary)
-                .replace(/\+/g, '-')
-                .replace(/\//g, '_')
-                .replace(/=+$/, '');
-        }
-
-        async function generateDeterministicPassword(master_passphrase, service_name) {
-            if (!master_passphrase || !service_name) {
-                return null; // Indicate failure
-            }
-
-            try {
-                const passphrase_buffer = strToArrayBuffer(master_passphrase);
-                const service_name_buffer = strToArrayBuffer(service_name);
-
-                const key = await crypto.subtle.importKey(
-                    'raw',
-                    passphrase_buffer,
-                    { name: 'PBKDF2' },
-                    false,
-                    ['deriveBits']
-                );
-
-                const pbkdf2_params = {
-                    name: 'PBKDF2',
-                    salt: service_name_buffer,
-                    iterations: PBKDF2_ITERATIONS,
-                    hash: 'SHA-256'
-                };
-
-                const derived_bits = await crypto.subtle.deriveBits(
-                    pbkdf2_params,
-                    key,
-                    DERIVED_KEY_LENGTH * 8
-                );
-
-                const password_raw = arrayBufferToBase64Url(derived_bits);
-                const final_password = password_raw.substring(0, FINAL_PASSWORD_LENGTH);
-
-                return final_password;
-
-            } catch (error) {
-                console.error("Error generating password:", error);
-                return null;
-            }
-        }
-
-        async function sendClickEvent() {
-
-            // Check the honeypot field before sending the event
-            if (emailTrapInput.value) {
-                console.warn('Honeypot field filled. Likely a bot. Not sending click event.');
-                return; // Do not send the event for counter
-            }
-            
-            try {
-                await fetch(API_GATEWAY_URL, {
-                    method: 'POST',
-                    mode: 'cors', // Ensure CORS is enabled
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        // Send any non-sensitive data here if needed,
-                        // e.g., 'event_type': 'generate_password_click'
-                        // For a simple counter, an empty body is fine.
-                    }),
-                });
-                console.log('Click event sent to Lambda.');
-            } catch (error) {
-                console.error('Failed to send click event to Lambda:', error);
-            }
-        }
-
-        
-        generateButton.addEventListener('click', async () => {
-            generateButton.disabled = true;
-            generateButton.textContent = 'Generating...';
-            generatedPasswordSpan.textContent = '';
-            passwordDisplayContainer.classList.add('hidden');
-
-            const master_passphrase = masterPassphraseInput.value;
-            const service_name = serviceNameInput.value.trim();
-
-            const generated_password = await generateDeterministicPassword(master_passphrase, service_name);
-
-            if (generated_password !== null) {
-                generatedPasswordSpan.textContent = generated_password;
-                passwordDisplayContainer.classList.remove('hidden');
-                showMessage("Password generated successfully!", 'success');
-                sendClickEvent();
-            } else {
-                showMessage("Password generation failed. Please ensure both passphrase and service name are entered.", 'error');
-            }
-
-            generateButton.disabled = false;
-            generateButton.textContent = 'Generate Password';
-        });
-
-        copyButton.addEventListener('click', () => {
-            const password_to_copy = generatedPasswordSpan.textContent;
-            if (password_to_copy) {
-                const temp_input = document.createElement('textarea');
-                temp_input.value = password_to_copy;
-                document.body.appendChild(temp_input);
-                temp_input.select();
-                try {
-                    document.execCommand('copy');
-                    showMessage("Password copied to clipboard!", 'success');
-                } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                    showMessage("Failed to copy password. Please copy manually.", 'error');
-                }
-                document.body.removeChild(temp_input);
-            }
-        });
-
-        masterPassphraseInput.addEventListener('input', () => {
-            messageBox.classList.remove('show');
-            passwordDisplayContainer.classList.add('hidden');
-        });
-        serviceNameInput.addEventListener('input', () => {
-            messageBox.classList.remove('show');
-            passwordDisplayContainer.classList.add('hidden');
-        });
-    </script>
+    <script src="password_ocean_script.js"></script>
 </body>
 </html>
