@@ -53,7 +53,6 @@
         <!-- Password Generator Container -->
         <div class="container">
 
-          <div id="messageBox" class="message-box" role="alert"></div>
             <!-- URL Safety Message -->
             <div class="url-safety-message">
                 <p><b><i>For your safety:</i></b> Please ensure you're on the correct URL - <strong>www.passwordocean.com</strong></p>
@@ -61,7 +60,7 @@
             <!-- Dropdown for "How It Works" -->
             <h3 id="toggleDetailedHowItWorks" class="how-it-works-toggle-heading">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                How It Works
+                Instructions
                 <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </h3>
             <!-- Expandable Detailed How It Works Section -->
@@ -84,7 +83,7 @@
                 <p class="mt-3 text-gray-700">The <strong><i>password generation happens entirely within your browser</i></strong>. We only collect anonymous usage statistics to improve our service. Your Master Passphrase and service name(s) are <strong><i>never</i></strong> transmitted.</p>
             </div>        
 
-            
+            <div id="messageBox" class="message-box" role="alert"></div>
 
             <div class="mb-5">
                 <label for="masterPassphrase" class="block text-gray-800 text-base font-semibold mb-2">Master Passphrase:</label>
@@ -121,7 +120,7 @@
 
             <!-- Important Note for the user -->
             <div class="button-note mt-6">
-                <p><strong>Important Note:</strong> PasswordOcean does not store any passwords. Your passwords are regenerated each time you provide your Master Passphrase and the exact Service Name. Therefore, we highly recommend using a different, easily recoverable password for your recovery email account, in case you ever forget your Master Passphrase or a specific Service Name.</p>
+                <p class="justified-text"><strong>Important Note:</strong> PasswordOcean does not store any passwords. Your passwords are regenerated each time you provide your Master Passphrase and the exact Service Name. Therefore, we highly recommend using a different, easily recoverable password for your recovery email account, in case you ever forget your Master Passphrase or a specific Service Name.</p>
             </div>
 
             <!-- Email Link in Footer -->
