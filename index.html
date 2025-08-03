@@ -58,17 +58,26 @@
         
         <!-- Password Generator Container -->
         <div class="container">
-
+            
             <!-- URL Safety Message -->
             <div class="url-safety-message">
                 <p><b><i>For your safety:</i></b> Please ensure you're on the correct URL - <strong>www.passwordocean.com</strong></p>
             </div>
             <!-- Dropdown for "How It Works" -->
-            <h3 id="toggleDetailedHowItWorks" class="how-it-works-toggle-heading">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Instructions
-                <svg class="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </h3>
+            <div class="flex justify-start mt-8">
+                <button id="toggleDetailedHowItWorks" class="expandable-info eye-catching-button">
+                    <!-- Info icon -->
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>How it works</span>
+                    <!-- Arrow icon -->
+                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+
             <!-- Expandable Detailed How It Works Section -->
             <div id="detailedHowItWorksContent" class="expandable-info hidden">
                 <strong><i>First time visitor?</i></strong>
@@ -135,6 +144,10 @@
             </div>
         </div>
     </main>
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-gray-400 text-sm">
+        <p>&copy; 2025 PasswordOcean. All rights reserved.</p>
+    </footer>
     <script src="password_ocean_script.js"></script>
 </body>
 </html>
